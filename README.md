@@ -1,17 +1,17 @@
-# mg-dbx-napi
+# mg_qjs
 
-High speed Synchronous and Asynchronous access to InterSystems Cache/IRIS and YottaDB from Node.js or Bun.
+High speed access to InterSystems Cache/IRIS and YottaDB from QuickJS (via Nginx).
 
 Chris Munt <cmunt@mgateway.com>  
-20 February 2026, MGateway Ltd [http://www.mgateway.com](http://www.mgateway.com)
+15 October 2026, MGateway Ltd [http://www.mgateway.com](http://www.mgateway.com)
 
-* Verified to work with Node.js and the Bun JavaScript engine.
+*** This project is in its experimental phase - Only recommended for those who have support aggreements with us ***
 * Two connectivity models to the InterSystems or YottaDB database are provided: High performance via the local database API or network based.
 * [Release Notes](#relnotes) can be found at the end of this document.
 
 Contents
 
-* [What Is mg-dbx-napi?](#whatis)
+* [What Is mg_qjs?](#whatis)
 * [Installing mg-dbx-napi](#install)
 * [Using mg-dbx-napi](#using)
 * [Connecting to the database](#connect)
@@ -25,14 +25,33 @@ Contents
 * [Background and History of This Package](#overview)
 * [License](#license)
 
-## <a name="whatis">What Is *mg-dbx-napi*?</a>
+## <a name="whatis">What Is *mg_qjs*?</a>
 
-This package provides **Node.js** and **Bun** applications with extremely high-performance access to InterSystems database products and the YottaDB database.
+This package provides **QuickJS** (embedded in the **Nginx** engine) applications with extremely high-performance access to InterSystems database products and the YottaDB database.
 
-## <a name="install">Installing mg-dbx-napi</a>
+## <a name="install">Installing mg_qjs</a>
 
-       npm install mg-dbx-napi
+The first step is to build the mg_qjs module (mg_qjs.so) in the /src directory
 
+Edit the the lines at the top of the Makefile file to match the paths for your installation.
+
+       # Edit the following three lines to match the paths in your installation 
+       # /path/to/installation/location/
+       MGQJSDIR=/opt/nginx1314/modules/
+       # -I/path/to/quickjs/
+       MGQJSINC=-I/opt/quickjs/
+       # -L/path/to/quickjs/
+       MGQJSLIB=-L/opt/quickjs/
+
+Now build the module
+
+       make
+
+Install the module in its working directory (The hosting Nginx must be shutdown before you do this) 
+ 
+       make install
+
+Now, configure Nginx to use the mg_qjs module.
 
 ## <a name="using">Using mg-dbx-napi</a>
 
