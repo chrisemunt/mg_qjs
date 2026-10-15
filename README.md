@@ -32,6 +32,12 @@ This package provides **QuickJS** (embedded in the **Nginx** engine) application
 
 ## <a name="install">Installing mg_qjs</a>
 
+This guide assumes that you have an **Nginx** installation with QuickJS built in.  The Nginx/QuickJS documentation can be found here:
+
+https://nginx.org/en/docs/njs/
+
+It is recommended that you get the simple **QuickJS** examples working before attempting to install **mg\_qjs**
+
 The first step is to build the **mg\_qjs** module (**mg\_qjs.so**) in the /src directory
 
 Edit the the lines at the top of the **Makefile** file to match the paths for your installation.
@@ -48,11 +54,55 @@ Now build the module
 
        make
 
-Install the module in its working directory (The hosting Nginx must be shutdown before you do this) 
+Install the module in its working directory (The hosting **Nginx** server must be shutdown before you do this) 
  
        make install
 
-Now, configure Nginx to use the **mg\_qjs** module.
+Now, configure Nginx to use the **mg\_qjs** module.  Edit the **Nginx** configuration file (nginx.conf) as follows.
+
+Add the following line to the global section:
+
+        # Comment: js_load_http_native_module /path/to/mg_qjs.so;
+        js_load_http_native_module /opt/nginx1314/modules/mg_qjs.so;
+
+Add the following lines to the http section.  As an example, we assume that you're using the simple test found in the /samples directory (**mg\_qjs**).:
+
+        http {
+           js_engine qjs;
+           # Comment: js_load_http_native_module /path/to/mg_qjs.js;
+           js_import /opt/nginx1314/html/js/mg_qjs.js;
+
+Finally, in the server section add a location from you wish to launch your JavaScript code:
+
+	         location /qjs {
+               js_content mg_qjs.handler;
+	         }
+
+In the top of the test code (**mg\_qjs.js**) you will find a range of connectivity options.  It is recommended that you start with the TCP based model using the **mgsi** superserver.
+
+Start the **Nginx** server and run the test form:
+
+            curl http::/localhost/qjs/test
+
+Using the test provided, you should see the following returned:
+
+            Result: 1.0.1
+            Open database (TCP) ...
+            Set records 1, 2 and 3 ...
+            Retrieve record (1): Chris Munt
+            Retrieve record (9):
+            Parse record set ...
+            Record : 1 : Chris Munt
+            Record : 2 : Rob Tweed
+            Record : 3 : John Smith
+            Is record (3) defined?: 1
+            Delete record (3): 0
+            Is record (3) defined?: 0
+            Parse record set (reverse order) ...
+            Record : 2 : Rob Tweed
+            Record : 1 : Chris Munt
+            Close database ...
+
 
 ## <a name="using">Using mg-dbx-napi</a>
 
