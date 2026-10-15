@@ -5,7 +5,7 @@ High speed access to InterSystems Cache/IRIS and YottaDB from QuickJS (via Nginx
 Chris Munt <cmunt@mgateway.com>  
 15 October 2026, MGateway Ltd [http://www.mgateway.com](http://www.mgateway.com)
 
-**NOTE!!! This project is in its experimental phase - Only recommended for those who have support aggreements with us**
+**NOTE!!! This project is in its experimental phase - Only recommended for those who have support aggreements with us.**
 
 * Two connectivity models to the InterSystems or YottaDB database are provided: High performance via the local database API or network based.
 * [Release Notes](#relnotes) can be found at the end of this document.
@@ -26,7 +26,7 @@ This package provides **QuickJS** (embedded in the **Nginx** engine) application
 
 ## <a name="install">Installing mg_qjs</a>
 
-This guide assumes that you have an **Nginx** installation with QuickJS built in.  The Nginx/QuickJS documentation can be found here:
+This guide assumes that you have an **Nginx** installation with QuickJS built in.  The **Nginx/QuickJS** documentation can be found here:
 
 https://nginx.org/en/docs/njs/
 
@@ -44,15 +44,15 @@ Edit the the lines at the top of the **Makefile** file to match the paths for yo
        # -L/path/to/quickjs/
        MGQJSLIB=-L/opt/quickjs/
 
-Now build the module
+Now build the module:
 
        make
 
-Install the module in its working directory (The hosting **Nginx** server must be shutdown before you do this) 
+Install the module in its working directory (The hosting **Nginx** server must be shutdown before you do this):
  
        make install
 
-Now, configure Nginx to use the **mg\_qjs** module.  Edit the **Nginx** configuration file (nginx.conf) as follows.
+Now, configure Nginx to use the **mg\_qjs** module.  Edit the **Nginx** configuration file (**nginx.conf**) as follows.
 
 Add the following line to the global section:
 
@@ -73,7 +73,7 @@ Finally, in the server section add a location from you wish to launch your JavaS
 	         }
 
 In the top of the test code (**mg\_qjs.js**) you will find a range of connectivity options.  It is recommended that you start with the TCP based model using the **mgsi** superserver.
-To use the API based models you should make sure that Nginx worker processes pocssess the necesary permissions to access the target database.
+To use the API based models you should make sure that Nginx worker processes possess the necesary permissions to access the target database.
 
 Start the **Nginx** server and run the test form:
 
@@ -113,12 +113,12 @@ Using the test provided, you should see the following returned:
 - [InterSystems Cache](https://www.intersystems.com/uk/cache/)
 - [YottaDB](https://yottadb.com/)
 
-*mg\_qjs* can connect in two ways to these databases:
+**mg\_qjs** can connect in two ways to these databases:
 
-- networked connection, where the Nginx/QuickJS system and database can be on separate servers
-- in-process API connection, where the Nginx/QuickJS system and database reside on the same physical server
+- networked connection, where the **Nginx/QuickJS** system and database can be on separate servers.
+- in-process API connection, where the **Nginx/QuickJS** system and database reside on the same physical server.
 
-Networked connections provide the most all-round platform compatibility (eg Nginx/QuickJS running on a Windows system can connect to YottaDB which only runs on Linux), and highest levels of security.  In order to use a networked connection, you need to install our DB Superserver on the database system: see next section below.
+Networked connections provide the most all-round platform compatibility (eg **Nginx/QuickJS** running on a Windows system can connect to YottaDB which only runs on Linux), and highest levels of security.  In order to use a networked connection, you need to install our DB Superserver on the database system: see next section below.
 
 The in-process API connection mode provides the very highest levels of performance, reaching near in-memory performance access to the respective database persistent storage.  Note that in this mode, you need to be aware of the platform availability of the database products:
 
@@ -129,7 +129,7 @@ The in-process API connection does **not** require installation of our DB Supers
 
 - you want to use SQL to access the data held on the database
 - you want to use the Merge command with the YottaDB database
-
+- 
 
 ### Installing the M support routines (also known as the DB Superserver)
 
@@ -186,7 +186,7 @@ Link all the **zmgsi** routines and check the installation:
 
 Note that the version of **zmgsi** is successfully displayed.
 
-Finally, add the following lines to the interface file (**zmgsi.ci** in the example used in the db.open() method).
+Finally, add the following lines to the interface file (**zmgsi.ci** in the example used in the mg.open() method).
 
        sqlemg: ydb_string_t * sqlemg^%zmgsis(I:ydb_string_t*, I:ydb_string_t *, I:ydb_string_t *)
        sqlrow: ydb_string_t * sqlrow^%zmgsis(I:ydb_string_t*, I:ydb_string_t *, I:ydb_string_t *)
@@ -217,7 +217,6 @@ Example:
         import * as mg from 'mg_qjs.so';
         function handler(r) {
            let result = mg.version() + "\r\n";
-           result = result + "Open database (TCP) ..." + "\r\n";
            mg.open("IRIS", "", "localhost", "7041", "_SYSTEM", "SYS", "USER");
            // we should be connected now
 
