@@ -5,7 +5,7 @@ High speed access to InterSystems Cache/IRIS and YottaDB from QuickJS (via Nginx
 Chris Munt <cmunt@mgateway.com>  
 15 October 2026, MGateway Ltd [http://www.mgateway.com](http://www.mgateway.com)
 
-**NOTE!!! This project is in its experimental phase - Only recommended for those who have support aggreements with us.**
+**NOTE!!! This project is in its experimental phase - Only recommended for those who have support agreements with us.**
 
 * Two connectivity models to the InterSystems or YottaDB database are provided: High performance via the local database API or network based.
 * [Release Notes](#relnotes) can be found at the end of this document.
@@ -20,13 +20,13 @@ Contents
 * [Invocation of database functions](#dbfunctions)
 * [License](#license)
 
-## <a name="whatis">What Is *mg_qjs*?</a>
+## <a name="whatis">What Is **mg_qjs**?</a>
 
 This package provides **QuickJS** (embedded in the **Nginx** engine) applications with extremely high-performance access to InterSystems database products and the YottaDB database.
 
 ## <a name="install">Installing mg_qjs</a>
 
-This guide assumes that you have an **Nginx** installation with QuickJS built in.  The **Nginx/QuickJS** documentation can be found here:
+This guide assumes that you have an **Nginx** installation with **QuickJS** built in.  The **Nginx/QuickJS** documentation can be found here:
 
 https://nginx.org/en/docs/njs/
 
@@ -73,7 +73,7 @@ Finally, in the server section add a location from you wish to launch your JavaS
 	         }
 
 In the top of the test code (**mg\_qjs.js**) you will find a range of connectivity options.  It is recommended that you start with the TCP based model using the **mgsi** superserver.
-To use the API based models you should make sure that Nginx worker processes possess the necesary permissions to access the target database.
+To use the API based models you should make sure that Nginx worker processes possess the necessary permissions to access the target database.
 
 Start the **Nginx** server and run the test form:
 
