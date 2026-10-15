@@ -5,15 +5,16 @@ High speed access to InterSystems Cache/IRIS and YottaDB from QuickJS (via Nginx
 Chris Munt <cmunt@mgateway.com>  
 15 October 2026, MGateway Ltd [http://www.mgateway.com](http://www.mgateway.com)
 
-*** This project is in its experimental phase - Only recommended for those who have support aggreements with us ***
+**NOTE!!! This project is in its experimental phase - Only recommended for those who have support aggreements with us**
+
 * Two connectivity models to the InterSystems or YottaDB database are provided: High performance via the local database API or network based.
 * [Release Notes](#relnotes) can be found at the end of this document.
 
 Contents
 
 * [What Is mg_qjs?](#whatis)
-* [Installing mg-dbx-napi](#install)
-* [Using mg-dbx-napi](#using)
+* [Installing mg_qjs](#install)
+* [Using mg_qjs](#using)
 * [Connecting to the database](#connect)
 * [Invocation of database commands](#dbcommands)
 * [Invocation of database functions](#dbfunctions)
@@ -31,9 +32,9 @@ This package provides **QuickJS** (embedded in the **Nginx** engine) application
 
 ## <a name="install">Installing mg_qjs</a>
 
-The first step is to build the mg_qjs module (mg_qjs.so) in the /src directory
+The first step is to build the **mg\_qjs** module (**mg\_qjs.so**) in the /src directory
 
-Edit the the lines at the top of the Makefile file to match the paths for your installation.
+Edit the the lines at the top of the **Makefile** file to match the paths for your installation.
 
        # Edit the following three lines to match the paths in your installation 
        # /path/to/installation/location/
@@ -51,7 +52,7 @@ Install the module in its working directory (The hosting Nginx must be shutdown 
  
        make install
 
-Now, configure Nginx to use the mg_qjs module.
+Now, configure Nginx to use the **mg\_qjs** module.
 
 ## <a name="using">Using mg-dbx-napi</a>
 
